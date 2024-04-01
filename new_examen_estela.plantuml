@@ -1,0 +1,106 @@
+@startuml
+class Usuario {
+    - id: int
+    - nombre: String
+    - contrasenia: String
+    + Usuario(id: int, nombre: String, contrasenia: String)
+    + getId(): int
+    + setId(id: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getContrasenia(): String
+    + setNombre(contrasenia: String): void
+}
+
+class Animal {
+    - id: int
+    - nombre: String
+    - especie: String
+    - recinto: String
+    - cuidador: String
+    + Animal(id: int, nombre: String, especie: String, recinto: String, cuidador: String)
+    + getId(): int
+    + setId(id: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getEspecie(): String
+    + setEspecie(especie: String): void
+    + getRecinto(): String
+    + setRecinto(recinto: String): void
+    + getCuidador(): String
+    + setCuidador(cuidador: String): void
+}
+
+class Especie {
+    - id: int
+    - nombre: String
+    - recintoAsociado: String
+    + Especie(id: int, nombre: String, recintoAsociado: String)
+    + getId(): int
+    + setId(id: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getRecintoAsociado(): String
+    + setRecintoAsociado(recinto: String): void
+}
+
+class Recinto {
+    - id: int
+    - nombre: String
+    - capacidad: String
+    + Recinto(id: int, nombre: String, capacidad: String)
+    + getId(): int
+    + setId(id: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getCapacidad(): String
+    + setCapacidad(capacidad:String): void
+}
+
+class Cuidador {
+    - id: int
+    - nombre: String
+    - especialidad: String
+    + Cuidador(id: int, nombre: String, especialidad: String)
+    + getId(): int
+    + setId(id: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getEspecialidad(): String
+    + setEspecialidad(especialidad: String): void
+}
+
+class Actividad {
+    - id: int
+    - nombre: String
+    - descripcion: String
+    - dia: String
+    - horario: String
+    + Actividad(id: int, nombre: String, descripcion: String, dia: String, horario: String)
+    + getId(): int
+    + setId(id: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getDescripcion(): String
+    + setDescripcion(descripcion: String): void
+    + getDia(): String
+    + setDia(dia: String): void
+    + getHorario(): String
+    + setHorario(horario: String): void
+}
+
+
+Usuario "1" -- "0..*" Animal : administra
+Especie "1" -- "0..*" Animal : contiene
+Recinto "1" -- "0..*" Animal : aloja
+Cuidador "1" -- "0..*" Animal : cuida
+Recinto "1" -- "0..*" Especie : alberga
+Recinto "1" -- "0..*" Cuidador : tiene a cargo
+Actividad "1" -- "0..*" Animal : asociada a
+
+Animal "1" -- "0..1" Especie : pertenece a
+Animal "1" -- "0..1" Recinto : alojado en
+Animal "1" -- "0..1" Cuidador : asignado a
+Especie "1" -- "0..1" Recinto : asociada con
+Cuidador "1" -- "0..1" Recinto : a cargo de
+Animal "1" -- "0..1" Actividad : participa en
